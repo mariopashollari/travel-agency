@@ -6,28 +6,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class City {
+public class PurchasingTour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String name;
+    private Integer id;
 
     @ManyToOne
-    private Country country;
+    private Tour tour;
 
-    @OneToMany(mappedBy = "city")
-    private List<Hotel> hotels;
-
-    @OneToMany(mappedBy = "city")
-    private List<Airport> airports;
-
-
+    private Double amount;
 }

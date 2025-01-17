@@ -2,11 +2,13 @@ package com.sda.travel_agency_project.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Hotel {
@@ -15,7 +17,7 @@ public class Hotel {
     private Long id;
 
     private String name;
-    private int standard; // Number of stars
+    private Integer standard; // Number of stars
     private String description;
 
     @ManyToOne
