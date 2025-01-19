@@ -35,10 +35,16 @@ public class CityService {
 
     public CityDto create(CityDto cityDto) {
         City city = CityDto.toEntity(cityDto);
-//        List<Hotel> hotels = hotelRepository.findAllById(cityDto.get) //set me hotele per 1 qytet
         city.setCountry(countryRepository.findById(cityDto.getCityId()).orElseThrow());
         return CityDto.toDto(cityRepository.save(city));
 
+    }
+
+    public CityDto update(CityDto cityDto) {
+        City city = findById(cityDto.getCityId());
+        city.setName(cityDto.getCityName());
+        city = cityRepository.save(city);
+        return CityDto.toDto(city);
     }
 
 }

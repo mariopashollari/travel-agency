@@ -30,13 +30,13 @@ public class HotelService {
 
     public HotelDto update(HotelDto hotelDto) {
         Hotel hotel = this.findById(hotelDto.getHotelId());
-        hotel = HotelDto.toEntity(hotelDto);
-        hotel.setCity(cityRepository.findById(hotelDto.getHotelId()).orElseThrow());
+        if (hotelDto.getCityId() !=  null)
+            hotel.setCity(cityRepository.findById(hotelDto.getHotelId()).orElseThrow());
+        hotel.setStandard(hotelDto.getNumberOfStars());
+        hotel.setName(hotelDto.getHotelName());
+        hotel.setDescription(hotelDto.getDescription());
         return HotelDto.toDto(hotelRepository.save(hotel));
     }
-
-
-
 
 
 

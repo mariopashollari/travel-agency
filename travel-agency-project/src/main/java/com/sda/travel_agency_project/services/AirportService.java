@@ -18,7 +18,7 @@ public class AirportService {
 
     public AirportDto create(AirportDto airportDto) {
         Airport airport = AirportDto.toEntity(airportDto);
-        airport.setCity(cityRepository.findByName(airportDto.getCityName()).orElseThrow());
+        airport.setCity(cityRepository.findById(airportDto.getCityId()).orElseThrow());
         return AirportDto.toDto(airportRepository.save(airport));
     }
 
@@ -32,8 +32,7 @@ public class AirportService {
 
     public AirportDto update(AirportDto airportDto) {
         Airport airport = this.findById(airportDto.getAirportId());
-        airport = airportDto.toEntity(airportDto);
-        airport.setCity(cityRepository.findByName(airportDto.getCityName()).orElseThrow());
-        return airportDto.toDto(airportRepository.save(airport));
+        airport.setName(airportDto.getAirportName());
+        return AirportDto.toDto(airportRepository.save(airport));
     }
 }

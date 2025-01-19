@@ -1,8 +1,10 @@
 package com.sda.travel_agency_project.services;
 
 import com.sda.travel_agency_project.dtos.AirportDto;
+import com.sda.travel_agency_project.dtos.CityDto;
 import com.sda.travel_agency_project.dtos.CountryDto;
 import com.sda.travel_agency_project.entities.Airport;
+import com.sda.travel_agency_project.entities.City;
 import com.sda.travel_agency_project.entities.Country;
 import com.sda.travel_agency_project.repositories.CityRepository;
 import com.sda.travel_agency_project.repositories.ContinentRepository;
@@ -27,6 +29,17 @@ public class CountryService {
         return CountryDto.toDto(this.findById(id));
     }
 
+    public CountryDto create(CountryDto countryDto) {
+        Country country = CountryDto.toEntity(countryDto);
+        country.setContinent(continentRepository.findById(countryDto.getCountryId()).orElseThrow());
+        return CountryDto.toDto(countryRepository.save(country));
+    }
 
+    public CountryDto update(CountryDto countryDto) {
+        Country country = findById(countryDto.getCountryId());
+        country.setName(countryDto.getCountryName());
+        country = countryRepository.save(country);
+        return CountryDto.toDto(country);
+    }
 
 }
