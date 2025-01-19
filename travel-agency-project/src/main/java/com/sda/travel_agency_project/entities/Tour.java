@@ -29,9 +29,6 @@ public class Tour {
     private City to_city;
 
     @ManyToOne
-    private Hotel from_hotel;
-
-    @ManyToOne
     private Hotel to_hotel;
 
     @ManyToOne

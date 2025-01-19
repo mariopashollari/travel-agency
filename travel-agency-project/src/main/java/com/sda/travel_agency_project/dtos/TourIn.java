@@ -1,6 +1,7 @@
 package com.sda.travel_agency_project.dtos;
 
 import com.sda.travel_agency_project.entities.Tour;
+import com.sda.travel_agency_project.static_data.Type;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,17 +38,17 @@ public class TourIn {
     private String type;
 
 
-    public static TourIn toEntity(TourDto tourDto) {
-        return TourIn.builder()
-                .tourId(tourDto.getTourId())
-                .tourName(tourDto.getTourName())
+    public static Tour toEntity(TourIn tourDto) {
+        return Tour.builder()
+                .id(tourDto.getTourId())
+                .name(tourDto.getTourName())
                 .adultPrice(tourDto.getAdultPrice())
                 .childPrice(tourDto.getChildPrice())
-                .departureDate(tourDto.getDepartureDate())
-                .returnDate(tourDto.getReturnDate())
+                .departure_date(tourDto.getDepartureDate())
+                .return_date(tourDto.getReturnDate())
                 .numberOfDays(tourDto.getNumberOfDays())
-                .seats(tourDto.getSeats())
-                .type(tourDto.getType().name())
+                .numberOfSeats(tourDto.getSeats())
+                .type(Type.valueOf(tourDto.getType()))
                 .promoted(tourDto.getPromoted())
                 .build();
     }

@@ -18,10 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class CountryService {
     private final CountryRepository countryRepository;
-    private final CityRepository cityRepository;
-    private final ContinentRepository continentRepository;
+    private final CityService cityService;
+    private final ContinentService continentService;
 
-    private Country findById(Long id) {
+    public Country findById(Long id) {
         return countryRepository.findById(id).orElseThrow();
     }
 
@@ -31,7 +31,7 @@ public class CountryService {
 
     public CountryDto create(CountryDto countryDto) {
         Country country = CountryDto.toEntity(countryDto);
-        country.setContinent(continentRepository.findById(countryDto.getCountryId()).orElseThrow());
+        country.setContinent(continentService.findById(countryDto.getCountryId()));
         return CountryDto.toDto(countryRepository.save(country));
     }
 

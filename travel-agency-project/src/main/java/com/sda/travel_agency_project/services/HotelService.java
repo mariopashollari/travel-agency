@@ -13,14 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class HotelService {
     private final HotelRepository hotelRepository;
-    private final CityRepository cityRepository;
+    private final CityService cityService;
 
     public HotelDto create(HotelDto hotelDto) {
         Hotel hotel = HotelDto.toEntity(hotelDto);
-        hotel.setCity(cityRepository.findById(hotelDto.getHotelId()).orElseThrow());
+        hotel.setCity(cityService.findById(hotelDto.getHotelId()));
         return HotelDto.toDto(hotelRepository.save(hotel));
     }
-    private Hotel findById(Long id) {
+    public Hotel findById(Long id) {
         return hotelRepository.findById(id).orElseThrow();
     }
 
@@ -31,7 +31,7 @@ public class HotelService {
     public HotelDto update(HotelDto hotelDto) {
         Hotel hotel = this.findById(hotelDto.getHotelId());
         if (hotelDto.getCityId() !=  null)
-            hotel.setCity(cityRepository.findById(hotelDto.getHotelId()).orElseThrow());
+            hotel.setCity(cityService.findById(hotelDto.getHotelId()));
         hotel.setStandard(hotelDto.getNumberOfStars());
         hotel.setName(hotelDto.getHotelName());
         hotel.setDescription(hotelDto.getDescription());

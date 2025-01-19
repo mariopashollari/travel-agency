@@ -42,7 +42,7 @@ public class ContinentService {
         Continent continent = this.findById(id);
         return ContinentDto.toDto(continent);
     }
-    private Continent findById(Long id) {
+    public Continent findById(Long id) {
         return continentRepository.findById(id)
                 .orElseThrow();
     }

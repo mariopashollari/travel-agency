@@ -20,12 +20,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CityService {
     private final CityRepository cityRepository;
-    private final CountryRepository countryRepository;
-    private final HotelRepository hotelRepository;
-    private final AirportRepository airportRepository;
+    private final CountryService countryService;
+    private final HotelService hotelService;
+    private final AirportService airportService;
 
 
-    private City findById(Long id) {
+    public City findById(Long id) {
         return cityRepository.findById(id).orElseThrow();
     }
 
@@ -35,7 +35,7 @@ public class CityService {
 
     public CityDto create(CityDto cityDto) {
         City city = CityDto.toEntity(cityDto);
-        city.setCountry(countryRepository.findById(cityDto.getCityId()).orElseThrow());
+        city.setCountry(countryService.findById(cityDto.getCityId()));
         return CityDto.toDto(cityRepository.save(city));
 
     }

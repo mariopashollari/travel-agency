@@ -39,7 +39,6 @@ public class TourDto {
                 .toCity(CityDto.toDto(tour.getTo_city()))
                 .fromAirport(AirportDto.toDto(tour.getFrom_airport()))
                 .toAirport(AirportDto.toDto(tour.getTo_airport()))
-                .fromHotel(HotelDto.toDto(tour.getFrom_hotel()))
                 .toHotel(HotelDto.toDto(tour.getTo_hotel()))
                 .departureDate(tour.getDeparture_date())
                 .returnDate(tour.getReturn_date())
@@ -51,4 +50,5 @@ public class TourDto {
                 .type(tour.getType())
                 .build();
     }
+
 }

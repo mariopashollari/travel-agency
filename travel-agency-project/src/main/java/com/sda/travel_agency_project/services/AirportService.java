@@ -12,17 +12,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @RequiredArgsConstructor
 public class AirportService {
-    private final CityRepository cityRepository;
+    private final CityService cityService;
     private final AirportRepository airportRepository;
 
 
     public AirportDto create(AirportDto airportDto) {
         Airport airport = AirportDto.toEntity(airportDto);
-        airport.setCity(cityRepository.findById(airportDto.getCityId()).orElseThrow());
+        airport.setCity(cityService.findById(airportDto.getCityId()));
         return AirportDto.toDto(airportRepository.save(airport));
     }
 
-    private Airport findById(Long id) {
+    public Airport findById(Long id) {
         return airportRepository.findById(id).orElseThrow();
     }
 
