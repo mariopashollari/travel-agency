@@ -20,4 +20,14 @@ public class PurchasingTour {
     private Tour tour;
 
     private Double amount;
+    private Integer adults;
+    private Integer children;
+    @ManyToOne
+    private AgencyUser agencyUser;
+
+    public Double getAmount() {
+        Double adultsPrice = this.adults * this.tour.getAdultPrice();
+        Double childrenPrice = this.children * this.tour.getChildPrice();
+        return adultsPrice + childrenPrice;
+    }
 }
