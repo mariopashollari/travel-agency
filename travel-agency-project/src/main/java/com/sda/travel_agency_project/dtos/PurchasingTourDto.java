@@ -11,23 +11,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PurchasingTourDto {
-    private Long purchasingTourId;
     private Long tourId;
     private String tourName;
     private Double amount;
+    private Integer adults;
+    private Integer children;
 
     public static PurchasingTourDto toDto(PurchasingTour purchasingTour) {
-        return PurchasingTourDto.builder()
-                .purchasingTourId(purchasingTour.getId())
+        return PurchasingTourDto
+                .builder()
+                .adults(purchasingTour.getAdults())
                 .amount(purchasingTour.getAmount())
-                .tourId(purchasingTour.getTour().getId())
+                .children(purchasingTour.getChildren())
                 .tourName(purchasingTour.getTour().getName())
-                .build();
-    }
-    public static PurchasingTour toEntity(PurchasingTourDto purchasingTourDto) {
-        return PurchasingTour.builder()
-                .id(purchasingTourDto.getTourId())
-                .amount(purchasingTourDto.getAmount())
                 .build();
     }
 }
