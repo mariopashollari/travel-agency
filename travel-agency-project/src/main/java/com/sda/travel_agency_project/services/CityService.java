@@ -46,5 +46,11 @@ public class CityService {
         city = cityRepository.save(city);
         return CityDto.toDto(city);
     }
+    public List<CityDto> findall() {
+        List<City> cities = cityRepository.findAll();
+        return cities.stream()
+                .map(CityDto::toDto)
+                .toList();
+    }
 
 }

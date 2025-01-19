@@ -9,9 +9,13 @@ import com.sda.travel_agency_project.repositories.AirportRepository;
 import com.sda.travel_agency_project.repositories.CityRepository;
 import com.sda.travel_agency_project.repositories.HotelRepository;
 import com.sda.travel_agency_project.repositories.TourRepository;
+import com.sda.travel_agency_project.static_data.Type;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @Transactional
@@ -62,4 +66,45 @@ public class TourService {
         return TourDto.toDto(tour);
     }
 
+    public List<TourDto> findall() {
+        List<Tour> tours = tourRepository.findAll();
+        return tours.stream()
+                .map(TourDto::toDto)
+                .toList();
+    }
+
+    public List<Tour> getToursByContinentId(Long continentId) {
+        return tourRepository.findByContinent(continentId);
+    }
+
+    public List<Tour> getToursByCountryId(Long countryId) {
+        return tourRepository.findByCountry(countryId);
+    }
+
+    public List<Tour> getToursByCityId(Long cityId) {
+        return tourRepository.findByCity(cityId);
+    }
+
+    public List<Tour> getToursByHotelId(Long hotelId) {
+        return tourRepository.findByHotel(hotelId);
+    }
+
+    public List<Tour> getToursByType(Type type) {
+        return tourRepository.findByType(type);
+    }
+
+    public List<Tour> getToursByHotelStarsGreaterThan(Integer standard) {
+        return tourRepository.findByHotelStarsGreaterThan(standard);
+    }
+
+    public List<Tour> getToursByDepartureDateGreaterThan(LocalDate departure_date) {
+        return tourRepository.findByDepartureDateGreaterThan(departure_date);
+    }
+
+
+    public List<Tour> getPromotedTours() {
+        return tourRepository.findPromotedTours();
+
+
+    }
 }

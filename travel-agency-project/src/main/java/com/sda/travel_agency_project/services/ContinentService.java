@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 @Transactional
@@ -45,6 +46,12 @@ public class ContinentService {
     public Continent findById(Long id) {
         return continentRepository.findById(id)
                 .orElseThrow();
+    }
+    public List<ContinentDto> findall() {
+        List<Continent> continents = continentRepository.findAll();
+        return continents.stream()
+                .map(ContinentDto::toDto)
+                .toList();
     }
 
 

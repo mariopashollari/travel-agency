@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -40,6 +42,13 @@ public class CountryService {
         country.setName(countryDto.getCountryName());
         country = countryRepository.save(country);
         return CountryDto.toDto(country);
+    }
+    public List<CountryDto> findall() {
+        List<Country> countries = countryRepository.findAll();
+        return countries.stream()
+                .map(CountryDto::toDto)
+                .toList();
+
     }
 
 }

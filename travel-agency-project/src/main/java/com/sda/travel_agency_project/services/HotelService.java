@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -36,6 +38,12 @@ public class HotelService {
         hotel.setName(hotelDto.getHotelName());
         hotel.setDescription(hotelDto.getDescription());
         return HotelDto.toDto(hotelRepository.save(hotel));
+    }
+    public List<HotelDto> findall() {
+        List<Hotel> hotels = hotelRepository.findAll();
+        return hotels.stream()
+                .map(HotelDto::toDto)
+                .toList();
     }
 
 

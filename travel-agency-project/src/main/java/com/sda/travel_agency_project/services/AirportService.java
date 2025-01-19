@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -34,5 +36,11 @@ public class AirportService {
         Airport airport = this.findById(airportDto.getAirportId());
         airport.setName(airportDto.getAirportName());
         return AirportDto.toDto(airportRepository.save(airport));
+    }
+    public List<AirportDto> findall() {
+        List<Airport> airports = airportRepository.findAll();
+        return airports.stream()
+                .map(AirportDto::toDto)
+                .toList();
     }
 }

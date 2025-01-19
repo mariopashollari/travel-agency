@@ -37,6 +37,7 @@ public class Tour {
     @ManyToOne
     private Airport to_airport;
 
+    @Enumerated(EnumType.STRING)
     private Type type;
 
     private LocalDate departure_date;
