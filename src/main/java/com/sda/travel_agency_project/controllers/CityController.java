@@ -16,8 +16,8 @@ public class CityController {
     private final CityService cityService;
 
     @PostMapping("/create")
-    public CityDto create(@Valid @RequestBody CityDto authorDto) {
-        return cityService.create(authorDto);
+    public CityDto create(@Valid @RequestBody CityDto cityDto) {
+        return cityService.create(cityDto);
     }
 
     @GetMapping("/all")
@@ -26,8 +26,8 @@ public class CityController {
     }
 
     @PutMapping("/update")
-    public CityDto update(@Valid @RequestBody CityDto authorDto) {
-        return cityService.update(authorDto);
+    public CityDto update(@Valid @RequestBody CityDto cityDto) {
+        return cityService.update(cityDto);
     }
 
     @GetMapping("/{id}")
