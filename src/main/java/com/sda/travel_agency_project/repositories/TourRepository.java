@@ -25,7 +25,7 @@ public interface TourRepository extends JpaRepository<Tour,Long> {
     @Query("SELECT t FROM Tour t WHERE t.type = :type")
     List<Tour> findByType(@Param("type") Type type);
 
-    @Query("SELECT t FROM Tour t WHERE t.hotel.standard > :standard")
+    @Query("SELECT t FROM Tour t WHERE t.to_hotel.standard > :standard")
     List<Tour> findByHotelStarsGreaterThan(@Param("standard") Integer standard);
 
     @Query("SELECT t FROM Tour t WHERE t.departure_date > :departure_date")

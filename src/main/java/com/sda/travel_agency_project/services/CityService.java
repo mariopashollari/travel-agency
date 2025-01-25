@@ -1,15 +1,10 @@
 package com.sda.travel_agency_project.services;
 
-import com.sda.travel_agency_project.dtos.AirportDto;
 import com.sda.travel_agency_project.dtos.CityDto;
-import com.sda.travel_agency_project.entities.Airport;
 import com.sda.travel_agency_project.entities.City;
-import com.sda.travel_agency_project.entities.Hotel;
-import com.sda.travel_agency_project.repositories.AirportRepository;
 import com.sda.travel_agency_project.repositories.CityRepository;
-import com.sda.travel_agency_project.repositories.CountryRepository;
-import com.sda.travel_agency_project.repositories.HotelRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,12 +12,16 @@ import java.util.List;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class CityService {
     private final CityRepository cityRepository;
     private final CountryService countryService;
     private final HotelService hotelService;
-    private final AirportService airportService;
+
+    public CityService(CityRepository cityRepository, CountryService countryService, @Lazy HotelService hotelService) {
+        this.cityRepository = cityRepository;
+        this.countryService = countryService;
+        this.hotelService = hotelService;
+    }
 
 
     public City findById(Long id) {

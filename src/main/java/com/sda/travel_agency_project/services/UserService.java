@@ -22,9 +22,13 @@ public class UserService {
     private final AuthenticationManager authenticationManager;
 
     public AgencyUser create(AgencyUser user) {
-        user.setActive(true);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        if (userRepository.existsByUsername(user.getUsername())) {
+            throw new RuntimeException("User with this username exists");
+        } else {
+            user.setActive(true);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            return userRepository.save(user);
+        }
     }
 
     public ResponseEntity<?> login(String username, String password) {
