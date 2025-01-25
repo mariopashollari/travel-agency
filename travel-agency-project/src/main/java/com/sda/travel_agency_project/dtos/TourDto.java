@@ -42,7 +42,6 @@ public class TourDto {
                 .toHotel(HotelDto.toDto(tour.getTo_hotel()))
                 .departureDate(tour.getDeparture_date())
                 .returnDate(tour.getReturn_date())
-                .numberOfDays(tour.getNumberOfDays())
                 .adultPrice(tour.getAdultPrice())
                 .childPrice(tour.getChildPrice())
                 .promoted(tour.getPromoted())

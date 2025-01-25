@@ -19,7 +19,7 @@ public class HotelService {
 
     public HotelDto create(HotelDto hotelDto) {
         Hotel hotel = HotelDto.toEntity(hotelDto);
-        hotel.setCity(cityService.findById(hotelDto.getHotelId()));
+        hotel.setCity(cityService.findById(hotelDto.getCityId()));
         return HotelDto.toDto(hotelRepository.save(hotel));
     }
     public Hotel findById(Long id) {
@@ -33,13 +33,13 @@ public class HotelService {
     public HotelDto update(HotelDto hotelDto) {
         Hotel hotel = this.findById(hotelDto.getHotelId());
         if (hotelDto.getCityId() !=  null)
-            hotel.setCity(cityService.findById(hotelDto.getHotelId()));
+            hotel.setCity(cityService.findById(hotelDto.getCityId()));
         hotel.setStandard(hotelDto.getNumberOfStars());
         hotel.setName(hotelDto.getHotelName());
         hotel.setDescription(hotelDto.getDescription());
         return HotelDto.toDto(hotelRepository.save(hotel));
     }
-    public List<HotelDto> findall() {
+    public List<HotelDto> findAll() {
         List<Hotel> hotels = hotelRepository.findAll();
         return hotels.stream()
                 .map(HotelDto::toDto)

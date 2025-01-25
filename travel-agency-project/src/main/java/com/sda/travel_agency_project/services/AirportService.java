@@ -37,7 +37,7 @@ public class AirportService {
         airport.setName(airportDto.getAirportName());
         return AirportDto.toDto(airportRepository.save(airport));
     }
-    public List<AirportDto> findall() {
+    public List<AirportDto> findAll() {
         List<Airport> airports = airportRepository.findAll();
         return airports.stream()
                 .map(AirportDto::toDto)

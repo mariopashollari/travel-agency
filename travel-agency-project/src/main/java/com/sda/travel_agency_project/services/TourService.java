@@ -1,13 +1,8 @@
 package com.sda.travel_agency_project.services;
 
-import com.sda.travel_agency_project.dtos.CityDto;
 import com.sda.travel_agency_project.dtos.TourDto;
 import com.sda.travel_agency_project.dtos.TourIn;
-import com.sda.travel_agency_project.entities.City;
 import com.sda.travel_agency_project.entities.Tour;
-import com.sda.travel_agency_project.repositories.AirportRepository;
-import com.sda.travel_agency_project.repositories.CityRepository;
-import com.sda.travel_agency_project.repositories.HotelRepository;
 import com.sda.travel_agency_project.repositories.TourRepository;
 import com.sda.travel_agency_project.static_data.Type;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -37,6 +33,8 @@ public class TourService {
 
     public TourDto create(TourIn tourIn) {
         Tour tour = TourIn.toEntity(tourIn);
+        Long numberOfDays = calculateDays(tourIn);
+        tour.setNumberOfDays(numberOfDays);
         tour.setFrom_airport(airportService.findById(tourIn.getFromAirportId()));
         tour.setTo_airport(airportService.findById(tourIn.getToAirportId()));
         tour.setFrom_city(cityService.findById(tourIn.getFromCityId()));
@@ -46,27 +44,31 @@ public class TourService {
 
     }
 
-    public TourDto update(TourDto tourDto) {
-        Tour tour = findById(tourDto.getTourId());
-        tour.setName(tourDto.getTourName());
-        tour.setAdultPrice(tourDto.getAdultPrice());
-        tour.setChildPrice(tourDto.getChildPrice());
-        tour.setPromoted(tourDto.getPromoted());
-        tour.setDeparture_date(tourDto.getDepartureDate());
-        tour.setReturn_date(tourDto.getReturnDate());
-        tour.setNumberOfDays(tourDto.getNumberOfDays());
-        tour.setNumberOfSeats(tourDto.getSeats());
-        tour.setType(tourDto.getType());
-        tour.setTo_hotel(hotelService.findById(tourDto.getToHotel().getHotelId()));
-        tour.setFrom_city(cityService.findById(tourDto.getFromCity().getCityId()));
-        tour.setTo_city(cityService.findById(tourDto.getToCity().getCityId()));
-        tour.setFrom_airport(airportService.findById(tourDto.getFromAirport().getAirportId()));
-        tour.setTo_airport(airportService.findById(tourDto.getToAirport().getAirportId()));
+    private Long calculateDays(TourIn tourIn) {
+        return ChronoUnit.DAYS.between(tourIn.getDepartureDate(), tourIn.getReturnDate());
+    }
+
+    public TourDto update(TourIn tourIn) {
+        Tour tour = findById(tourIn.getTourId());
+        tour.setName(tourIn.getTourName());
+        tour.setAdultPrice(tourIn.getAdultPrice());
+        tour.setChildPrice(tourIn.getChildPrice());
+        tour.setPromoted(tourIn.getPromoted());
+        tour.setDeparture_date(tourIn.getDepartureDate());
+        tour.setReturn_date(tourIn.getReturnDate());
+        tour.setNumberOfDays(calculateDays(tourIn));
+        tour.setNumberOfSeats(tourIn.getSeats());
+        tour.setType(Type.valueOf(tourIn.getType()));
+        tour.setTo_hotel(hotelService.findById(tourIn.getToHotelId()));
+        tour.setFrom_city(cityService.findById(tourIn.getFromCityId()));
+        tour.setTo_city(cityService.findById(tourIn.getToCityId()));
+        tour.setFrom_airport(airportService.findById(tourIn.getFromAirportId()));
+        tour.setTo_airport(airportService.findById(tourIn.getToAirportId()));
         tour = tourRepository.save(tour);
         return TourDto.toDto(tour);
     }
 
-    public List<TourDto> findall() {
+    public List<TourDto> findAll() {
         List<Tour> tours = tourRepository.findAll();
         return tours.stream()
                 .map(TourDto::toDto)
@@ -104,7 +106,5 @@ public class TourService {
 
     public List<Tour> getPromotedTours() {
         return tourRepository.findPromotedTours();
-
-
     }
 }

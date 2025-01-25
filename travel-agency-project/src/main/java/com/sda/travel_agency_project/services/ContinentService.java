@@ -47,7 +47,7 @@ public class ContinentService {
         return continentRepository.findById(id)
                 .orElseThrow();
     }
-    public List<ContinentDto> findall() {
+    public List<ContinentDto> findAll() {
         List<Continent> continents = continentRepository.findAll();
         return continents.stream()
                 .map(ContinentDto::toDto)

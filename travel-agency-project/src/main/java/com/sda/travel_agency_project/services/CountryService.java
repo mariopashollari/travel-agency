@@ -33,7 +33,7 @@ public class CountryService {
 
     public CountryDto create(CountryDto countryDto) {
         Country country = CountryDto.toEntity(countryDto);
-        country.setContinent(continentService.findById(countryDto.getCountryId()));
+        country.setContinent(continentService.findById(countryDto.getContinentId()));
         return CountryDto.toDto(countryRepository.save(country));
     }
 
@@ -43,7 +43,7 @@ public class CountryService {
         country = countryRepository.save(country);
         return CountryDto.toDto(country);
     }
-    public List<CountryDto> findall() {
+    public List<CountryDto> findAll() {
         List<Country> countries = countryRepository.findAll();
         return countries.stream()
                 .map(CountryDto::toDto)

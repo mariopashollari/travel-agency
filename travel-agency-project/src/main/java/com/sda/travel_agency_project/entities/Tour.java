@@ -44,7 +44,7 @@ public class Tour {
 
     private LocalDate return_date;
 
-    private Integer numberOfDays;
+    private Long numberOfDays;
 
     private Double adultPrice;
 

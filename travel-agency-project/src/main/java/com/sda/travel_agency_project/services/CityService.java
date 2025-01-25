@@ -35,7 +35,7 @@ public class CityService {
 
     public CityDto create(CityDto cityDto) {
         City city = CityDto.toEntity(cityDto);
-        city.setCountry(countryService.findById(cityDto.getCityId()));
+        city.setCountry(countryService.findById(cityDto.getCountryId()));
         return CityDto.toDto(cityRepository.save(city));
 
     }
@@ -46,7 +46,7 @@ public class CityService {
         city = cityRepository.save(city);
         return CityDto.toDto(city);
     }
-    public List<CityDto> findall() {
+    public List<CityDto> findAll() {
         List<City> cities = cityRepository.findAll();
         return cities.stream()
                 .map(CityDto::toDto)
