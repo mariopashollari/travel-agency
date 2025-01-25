@@ -107,4 +107,20 @@ public class TourService {
     public List<Tour> getPromotedTours() {
         return tourRepository.findPromotedTours();
     }
+
+    public List<Tour> findAllDepartureDateBetween(LocalDate startDate, LocalDate endDate) {
+        return tourRepository.findAllDepartureDateBetween(startDate, endDate);
+    }
+
+    public List<Tour> findAllReturnDateBetween(LocalDate startDate, LocalDate endDate) {
+        return tourRepository.findAllReturnDateBetween(startDate, endDate);
+
+    }
+
+    public void deactivateTour(Long id) {
+        Tour tour = this.findById(id);
+        tour.setActivated(false);
+        tourRepository.save(tour);
+
+    }
 }

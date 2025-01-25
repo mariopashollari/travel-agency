@@ -54,4 +54,6 @@ public class Tour {
 
     private Integer numberOfSeats;
 
+    private Boolean activated;
+
 }
