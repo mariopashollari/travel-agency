@@ -2,6 +2,7 @@ package com.sda.travel_agency_project.services;
 
 import com.sda.travel_agency_project.entities.AgencyUser;
 import com.sda.travel_agency_project.repositories.UserRepository;
+import com.sda.travel_agency_project.static_data.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,6 +27,17 @@ public class UserService {
             throw new RuntimeException("User with this username exists");
         } else {
             user.setActive(true);
+            user.setRole(Role.ROLE_USER);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            return userRepository.save(user);
+        }
+    }
+    public AgencyUser createAdmin(AgencyUser user) {
+        if (userRepository.existsByUsername(user.getUsername())) {
+            throw new RuntimeException("User with this username exists");
+        } else {
+            user.setActive(true);
+            user.setRole(Role.ROLE_ADMIN);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             return userRepository.save(user);
         }

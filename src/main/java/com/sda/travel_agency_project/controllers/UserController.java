@@ -21,4 +21,8 @@ public class UserController {
     public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
         return userService.login(username, password);
     }
+    @PostMapping("/create_admin")
+    public AgencyUser createAdmin(@RequestBody AgencyUser user) {
+        return userService.create(user);
+    }
 }

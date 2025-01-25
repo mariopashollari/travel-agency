@@ -43,7 +43,7 @@ public class TourController {
     public List<Tour> findByHotel(@RequestParam Long id) {return tourService.getToursByHotelId(id);}
 
     @GetMapping("/by_type")
-    public List<Tour> findByType(@RequestParam Type type) {return tourService.getToursByType(type);}
+    public List<Tour> findByType(@RequestParam String type) {return tourService.getToursByType(type);}
 
     @GetMapping("/by_promoted")
     public List<Tour> findAllPromoted() {return tourService.getPromotedTours();}

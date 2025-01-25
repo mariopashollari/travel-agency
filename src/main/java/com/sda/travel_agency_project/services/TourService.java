@@ -91,9 +91,9 @@ public class TourService {
         return tourRepository.findByHotel(hotelId);
     }
 
-    public List<Tour> getToursByType(Type type) {
-        return tourRepository.findByType(type);
-    }
+//    public List<Tour> getToursByType(Type type) {
+//        return tourRepository.findByType(type);
+//    }
 
     public List<Tour> getToursByHotelStarsGreaterThan(Integer standard) {
         return tourRepository.findByHotelStarsGreaterThan(standard);
@@ -122,5 +122,14 @@ public class TourService {
         tour.setActivated(false);
         tourRepository.save(tour);
 
+    }
+
+    public List<Tour> getToursByType(String type) {
+        try {
+            Type enumType = Type.valueOf(type.toUpperCase());
+            return tourRepository.findByType(enumType);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid tour type: " + type);
+        }
     }
 }
