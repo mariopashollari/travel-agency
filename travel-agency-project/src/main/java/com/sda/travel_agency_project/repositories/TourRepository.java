@@ -34,6 +34,14 @@ public interface TourRepository extends JpaRepository<Tour,Long> {
     @Query("SELECT t FROM Tour t WHERE t.promoted = true")
     List<Tour> findPromotedTours();
 
+    @Query("SELECT t FROM Tour t WHERE t.departure_date BETWEEN :startDate AND :endDate")
+    List<Tour> findAllDepartureDateBetween(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+
+    @Query("SELECT t FROM Tour t WHERE t.return_date BETWEEN :startDate AND :endDate")
+    List<Tour> findAllReturnDateBetween(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+
+
+
 
 
 
