@@ -26,7 +26,7 @@ public AirportDto create(@Valid @RequestBody AirportDto airportDto) {
     return airportService.update(authorDto);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/public/{id}")
     public AirportDto getById(@PathVariable Long id) {
 
     return airportService.getById(id);

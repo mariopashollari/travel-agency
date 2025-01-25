@@ -45,7 +45,7 @@ public class SecurityConfig implements WebMvcConfigurer {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(request ->
-                request.requestMatchers("/user/create", "/user/login").permitAll()
+                request.requestMatchers("/user/create", "/user/login", "**/public/**").permitAll()
                         .requestMatchers("/user/create_admin").hasRole("ADMIN")
                         .anyRequest().authenticated());
         httpSecurity.authenticationManager(authenticationManager(httpSecurity));
@@ -55,4 +55,24 @@ public class SecurityConfig implements WebMvcConfigurer {
         return httpSecurity.build();
 
     }
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+//        httpSecurity.authorizeHttpRequests(request ->
+//                request
+//                        .requestMatchers("**/public/**").permitAll()
+//
+//                        .anyRequest().authenticated()
+//        );
+//
+//        httpSecurity.authenticationManager(authenticationManager(httpSecurity));
+//
+//        httpSecurity
+//                .cors(Customizer.withDefaults())
+//                .csrf(AbstractHttpConfigurer::disable)
+//                .httpBasic(Customizer.withDefaults());
+//
+//        return httpSecurity.build();
+//    }
+
+
 }

@@ -20,7 +20,7 @@ public class CountryController {
         return countryService.create(countryDto);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/public/all")
     public List<CountryDto> findAll() {
         return countryService.findAll();
     }
@@ -30,7 +30,7 @@ public class CountryController {
         return countryService.update(countryDto);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/public/{id}")
     public CountryDto getById(@PathVariable Long id) {
         return countryService.getById(id);
     }

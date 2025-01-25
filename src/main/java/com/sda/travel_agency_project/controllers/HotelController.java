@@ -20,7 +20,7 @@ public class HotelController {
         return hotelService.create(hotelDto);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/public/all")
     public List<HotelDto> findAll() {
         return hotelService.findAll();
     }
@@ -30,7 +30,7 @@ public class HotelController {
         return hotelService.update(hotelDto);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/public/{id}")
     public HotelDto getById(@PathVariable Long id) {
         return hotelService.getById(id);
     }

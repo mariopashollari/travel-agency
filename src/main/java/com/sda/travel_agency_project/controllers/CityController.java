@@ -20,7 +20,7 @@ public class CityController {
         return cityService.create(cityDto);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/public/all")
     public List<CityDto> findAll() {
         return cityService.findAll();
     }
@@ -30,7 +30,7 @@ public class CityController {
         return cityService.update(cityDto);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/public/{id}")
     public CityDto getById(@PathVariable Long id) {
         return cityService.getById(id);
     }

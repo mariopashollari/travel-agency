@@ -17,13 +17,13 @@ public class ContinentController {
     private final ContinentService continentService;
 
 
-    @GetMapping("/all")
+    @GetMapping("/public/all")
     public List<ContinentDto> findAll() {
         return continentService.findAll();
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/public/{id}")
     public ContinentDto getById(@PathVariable Long id) {
         return continentService.getById(id);
     }

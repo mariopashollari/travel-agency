@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
 
-    @PostMapping("/create")
+    @PostMapping("/public/create")
     public AgencyUser create(@RequestBody AgencyUser user) {
         return userService.create(user);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/public/login")
     public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
         return userService.login(username, password);
     }
