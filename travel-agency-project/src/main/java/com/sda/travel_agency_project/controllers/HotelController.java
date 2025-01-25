@@ -16,8 +16,8 @@ public class HotelController {
     private final HotelService hotelService;
 
     @PostMapping("/create")
-    public HotelDto create(@Valid @RequestBody HotelDto authorDto) {
-        return hotelService.create(authorDto);
+    public HotelDto create(@Valid @RequestBody HotelDto hotelDto) {
+        return hotelService.create(hotelDto);
     }
 
     @GetMapping("/all")
@@ -26,8 +26,8 @@ public class HotelController {
     }
 
     @PutMapping("/update")
-    public HotelDto update(@Valid @RequestBody HotelDto authorDto) {
-        return hotelService.update(authorDto);
+    public HotelDto update(@Valid @RequestBody HotelDto hotelDto) {
+        return hotelService.update(hotelDto);
     }
 
     @GetMapping("/{id}")

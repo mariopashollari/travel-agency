@@ -46,7 +46,6 @@ public class TourIn {
                 .childPrice(tourDto.getChildPrice())
                 .departure_date(tourDto.getDepartureDate())
                 .return_date(tourDto.getReturnDate())
-                .numberOfDays(tourDto.getNumberOfDays())
                 .numberOfSeats(tourDto.getSeats())
                 .type(Type.valueOf(tourDto.getType()))
                 .promoted(tourDto.getPromoted())

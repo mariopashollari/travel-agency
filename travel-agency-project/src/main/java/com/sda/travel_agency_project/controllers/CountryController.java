@@ -16,8 +16,8 @@ public class CountryController {
     private final CountryService countryService;
 
     @PostMapping("/create")
-    public CountryDto create(@Valid @RequestBody CountryDto authorDto) {
-        return countryService.create(authorDto);
+    public CountryDto create(@Valid @RequestBody CountryDto countryDto) {
+        return countryService.create(countryDto);
     }
 
     @GetMapping("/all")
@@ -26,8 +26,8 @@ public class CountryController {
     }
 
     @PutMapping("/update")
-    public CountryDto update(@Valid @RequestBody CountryDto authorDto) {
-        return countryService.update(authorDto);
+    public CountryDto update(@Valid @RequestBody CountryDto countryDto) {
+        return countryService.update(countryDto);
     }
 
     @GetMapping("/{id}")
