@@ -3,6 +3,7 @@ package com.sda.travel_agency_project.services;
 import com.sda.travel_agency_project.dtos.TourDto;
 import com.sda.travel_agency_project.dtos.TourIn;
 import com.sda.travel_agency_project.entities.Tour;
+import com.sda.travel_agency_project.exceptions.AgencyExceptions;
 import com.sda.travel_agency_project.repositories.TourRepository;
 import com.sda.travel_agency_project.static_data.Type;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class TourService {
     private final AirportService airportService;
 
     private Tour findById(Long id) {
-        return tourRepository.findById(id).orElseThrow();
+        return tourRepository.findById(id).orElseThrow(()-> AgencyExceptions.notFound(Tour.class.getSimpleName(), id));
     }
 
     public TourDto getById(Long id) {

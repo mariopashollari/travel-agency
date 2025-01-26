@@ -3,6 +3,7 @@ package com.sda.travel_agency_project.services;
 import com.sda.travel_agency_project.dtos.PurchasingTourDto;
 import com.sda.travel_agency_project.entities.PurchasingTour;
 import com.sda.travel_agency_project.entities.Tour;
+import com.sda.travel_agency_project.exceptions.AgencyExceptions;
 import com.sda.travel_agency_project.repositories.PurchasingTourRepository;
 import com.sda.travel_agency_project.repositories.TourRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -64,8 +65,9 @@ public class PurchasingTourService {
     public PurchasingTourDto getById(Long id) {
         return PurchasingTourDto.toDto(this.findById(id));
     }
+
     private PurchasingTour findById(Long id) {
-        return purchasingTourRepository.findById(id).orElseThrow();
+        return purchasingTourRepository.findById(id).orElseThrow(()-> AgencyExceptions.notFound(PurchasingTour.class.getSimpleName(), id));
     }
 
     public List<PurchasingTourDto> getAll() {

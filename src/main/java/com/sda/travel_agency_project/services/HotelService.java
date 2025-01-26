@@ -2,6 +2,7 @@ package com.sda.travel_agency_project.services;
 
 import com.sda.travel_agency_project.dtos.HotelDto;
 import com.sda.travel_agency_project.entities.Hotel;
+import com.sda.travel_agency_project.exceptions.AgencyExceptions;
 import com.sda.travel_agency_project.repositories.CityRepository;
 import com.sda.travel_agency_project.repositories.HotelRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class HotelService {
         return HotelDto.toDto(hotelRepository.save(hotel));
     }
     public Hotel findById(Long id) {
-        return hotelRepository.findById(id).orElseThrow();
+        return hotelRepository.findById(id).orElseThrow(()-> AgencyExceptions.notFound(Hotel.class.getSimpleName(), id));
     }
 
     public HotelDto getById(Long id) {

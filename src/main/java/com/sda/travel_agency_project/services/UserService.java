@@ -1,6 +1,8 @@
 package com.sda.travel_agency_project.services;
 
 import com.sda.travel_agency_project.entities.AgencyUser;
+import com.sda.travel_agency_project.entities.Airport;
+import com.sda.travel_agency_project.exceptions.AgencyExceptions;
 import com.sda.travel_agency_project.repositories.UserRepository;
 import com.sda.travel_agency_project.static_data.Role;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,6 +60,6 @@ public class UserService {
     public AgencyUser getUserLoggedIn() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return userRepository.findByUsername(username)
-                .orElseThrow();
+                .orElseThrow(()-> AgencyExceptions.notFound(User.class.getSimpleName(), username));
     }
 }

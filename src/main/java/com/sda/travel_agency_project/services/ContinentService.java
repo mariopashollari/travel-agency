@@ -2,6 +2,7 @@ package com.sda.travel_agency_project.services;
 
 import com.sda.travel_agency_project.dtos.ContinentDto;
 import com.sda.travel_agency_project.entities.Continent;
+import com.sda.travel_agency_project.exceptions.AgencyExceptions;
 import com.sda.travel_agency_project.repositories.ContinentRepository;
 import com.sda.travel_agency_project.static_data.ContinentsData;
 import jakarta.annotation.PostConstruct;
@@ -45,7 +46,7 @@ public class ContinentService {
     }
     public Continent findById(Long id) {
         return continentRepository.findById(id)
-                .orElseThrow();
+                .orElseThrow(()-> AgencyExceptions.notFound(Continent.class.getSimpleName(), id));
     }
     public List<ContinentDto> findAll() {
         List<Continent> continents = continentRepository.findAll();

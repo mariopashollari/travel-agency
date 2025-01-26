@@ -2,6 +2,7 @@ package com.sda.travel_agency_project.services;
 
 import com.sda.travel_agency_project.dtos.CityDto;
 import com.sda.travel_agency_project.entities.City;
+import com.sda.travel_agency_project.exceptions.AgencyExceptions;
 import com.sda.travel_agency_project.repositories.CityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
@@ -25,7 +26,7 @@ public class CityService {
 
 
     public City findById(Long id) {
-        return cityRepository.findById(id).orElseThrow();
+        return cityRepository.findById(id).orElseThrow(()-> AgencyExceptions.notFound(City.class.getSimpleName(), id));
     }
 
     public CityDto getById(Long id) {

@@ -2,6 +2,7 @@ package com.sda.travel_agency_project.services;
 
 import com.sda.travel_agency_project.dtos.CountryDto;
 import com.sda.travel_agency_project.entities.Country;
+import com.sda.travel_agency_project.exceptions.AgencyExceptions;
 import com.sda.travel_agency_project.repositories.CountryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class CountryService {
     private final ContinentService continentService;
 
     public Country findById(Long id) {
-        return countryRepository.findById(id).orElseThrow();
+        return countryRepository.findById(id).orElseThrow(()-> AgencyExceptions.notFound(Country.class.getSimpleName(), id));
     }
 
     public CountryDto getById(Long id) {
