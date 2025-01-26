@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PurchasingTourDto {
+    private Long id;
     private Long tourId;
     private String tourName;
     private Double amount;
