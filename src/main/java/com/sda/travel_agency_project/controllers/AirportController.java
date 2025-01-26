@@ -31,4 +31,7 @@ public AirportDto create(@Valid @RequestBody AirportDto airportDto) {
 
     return airportService.getById(id);
     }
+    @GetMapping("/public/by_city")
+    public List<Airport> findByCity(@RequestParam Long id){return airportService.getByCity(id);}
+
 }

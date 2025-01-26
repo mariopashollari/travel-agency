@@ -1,6 +1,7 @@
 package com.sda.travel_agency_project.controllers;
 
 import com.sda.travel_agency_project.dtos.HotelDto;
+import com.sda.travel_agency_project.entities.Hotel;
 import com.sda.travel_agency_project.services.HotelService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +35,8 @@ public class HotelController {
     public HotelDto getById(@PathVariable Long id) {
         return hotelService.getById(id);
     }
+
+    @GetMapping("/public/by_city")
+    public List<Hotel> findByCity(@RequestParam Long id){return hotelService.findByCity(id);}
 
 }
