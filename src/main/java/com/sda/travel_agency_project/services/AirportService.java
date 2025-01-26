@@ -1,6 +1,7 @@
 package com.sda.travel_agency_project.services;
 
 import com.sda.travel_agency_project.dtos.AirportDto;
+import com.sda.travel_agency_project.dtos.CityDto;
 import com.sda.travel_agency_project.entities.Airport;
 import com.sda.travel_agency_project.repositories.AirportRepository;
 import com.sda.travel_agency_project.repositories.CityRepository;
@@ -43,4 +44,9 @@ public class AirportService {
                 .map(AirportDto::toDto)
                 .toList();
     }
+    public List<Airport> getByCity(Long cityId) {
+        return airportRepository.findByCity(cityId);
+    }
+
+
 }

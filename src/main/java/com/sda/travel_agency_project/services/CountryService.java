@@ -43,5 +43,10 @@ public class CountryService {
                 .toList();
 
     }
+    public List<Country> findByContinent(Long continentId) {
+        return countryRepository.findByContinent(continentId);
+    }
+
+
 
 }

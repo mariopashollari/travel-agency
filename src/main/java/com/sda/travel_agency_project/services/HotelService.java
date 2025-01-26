@@ -45,7 +45,8 @@ public class HotelService {
                 .map(HotelDto::toDto)
                 .toList();
     }
-
-
+    public List<Hotel> findByCity(Long cityId) {
+        return hotelRepository.findByCity(cityId);
+    }
 
 }
