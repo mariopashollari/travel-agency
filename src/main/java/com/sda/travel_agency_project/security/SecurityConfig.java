@@ -45,7 +45,7 @@ public class SecurityConfig implements WebMvcConfigurer {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(request ->
-                request.requestMatchers("/user/create", "/user/login", "**/public/**").permitAll()
+                request.requestMatchers("/*/public/**").permitAll()
                         .requestMatchers("/user/create_admin").hasRole("ADMIN")
                         .anyRequest().authenticated());
         httpSecurity.authenticationManager(authenticationManager(httpSecurity));
