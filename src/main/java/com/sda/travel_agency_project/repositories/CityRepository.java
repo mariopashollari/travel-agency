@@ -15,6 +15,4 @@ public interface CityRepository extends JpaRepository<City,Long> {
     @Query("SELECT c FROM City c WHERE c.country.id = :countryId")
     List<City> findByCountry(@Param("countryId") Long countryId);
 
-
-
 }
