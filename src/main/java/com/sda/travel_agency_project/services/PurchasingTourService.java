@@ -61,6 +61,9 @@ public class PurchasingTourService {
         return PurchasingTourDto.toDto(purchasingTour);
     }
 
+    public PurchasingTourDto getById(Long id) {
+        return PurchasingTourDto.toDto(this.findById(id));
+    }
     private PurchasingTour findById(Long id) {
         return purchasingTourRepository.findById(id).orElseThrow();
     }
