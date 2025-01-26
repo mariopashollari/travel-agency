@@ -51,5 +51,10 @@ public class CityService {
                 .map(CityDto::toDto)
                 .toList();
     }
+    public List<City> findByCountry(Long countryId) {
+        return cityRepository.findByCountry(countryId);
+
+    }
+
 
 }
