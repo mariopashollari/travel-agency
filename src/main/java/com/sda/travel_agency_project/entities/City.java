@@ -1,5 +1,6 @@
 package com.sda.travel_agency_project.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,9 +26,11 @@ public class City {
     private Country country;
 
     @OneToMany(mappedBy = "city")
+    @JsonIgnore
     private List<Hotel> hotels;
 
     @OneToMany(mappedBy = "city")
+    @JsonIgnore
     private List<Airport> airports;
 
 

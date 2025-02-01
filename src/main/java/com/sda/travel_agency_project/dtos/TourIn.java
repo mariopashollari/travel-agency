@@ -20,8 +20,6 @@ public class TourIn {
     private String fromCityName;
     private Long toCityId;
     private String toCityName;
-    private Long fromHotelId;
-    private String fromHotelName;
     private Long toHotelId;
     private String toHotelName;
     private Long fromAirportId;

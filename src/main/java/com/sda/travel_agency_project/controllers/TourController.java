@@ -60,7 +60,7 @@ public class TourController {
     @GetMapping("/public/by_departure_date_greater")
     public List<Tour> findByDepartureDateGreaterThan(@RequestParam LocalDate departure_date) {return tourService.getToursByDepartureDateGreaterThan(departure_date);}
 
-    @GetMapping("/tours/{id}/deactivate")
+    @GetMapping("/deactivate/{id}")
     public void deactivateTour(@PathVariable Long id) {
          tourService.deactivateTour(id);
 

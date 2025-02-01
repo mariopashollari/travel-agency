@@ -27,7 +27,7 @@ public class PurchasingController {
     }
 
     @PostMapping("/create")
-    public PurchasingTourDto create(@Valid @RequestBody PurchasingTourDto purchasingTourDto) {
+    public PurchasingTourDto create(@RequestBody PurchasingTourDto purchasingTourDto) {
         return purchasingTourService.create(purchasingTourDto);
     }
 

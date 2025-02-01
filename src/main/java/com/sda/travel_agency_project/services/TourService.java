@@ -41,6 +41,7 @@ public class TourService {
         tour.setFrom_city(cityService.findById(tourIn.getFromCityId()));
         tour.setTo_city(cityService.findById(tourIn.getToCityId()));
         tour.setTo_hotel(hotelService.findById(tourIn.getToHotelId()));
+        tour.setActivated(true);
         return TourDto.toDto(tourRepository.save(tour));
 
     }

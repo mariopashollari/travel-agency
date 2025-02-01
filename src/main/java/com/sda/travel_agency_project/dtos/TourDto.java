@@ -18,13 +18,12 @@ public class TourDto {
     private String tourName;
     private CityDto fromCity;
     private CityDto toCity;
-    private HotelDto fromHotel;
     private HotelDto toHotel;
     private AirportDto fromAirport;
     private AirportDto toAirport;
     private LocalDate departureDate;
     private LocalDate returnDate;
-    private Integer numberOfDays;
+    private Long numberOfDays;
     private Double adultPrice;
     private Double childPrice;
     private Boolean promoted;
@@ -47,6 +46,7 @@ public class TourDto {
                 .promoted(tour.getPromoted())
                 .seats(tour.getNumberOfSeats())
                 .type(tour.getType())
+                .numberOfDays(tour.getNumberOfDays())
                 .build();
     }
 

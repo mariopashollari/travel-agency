@@ -26,6 +26,7 @@ public class AirportDto {
         return AirportDto.builder()
                 .airportId(airport.getId())
                 .airportName(airport.getName())
+                .cityId(airport.getCity().getId())
                 .cityName(airport.getCity().getName())
                 .build();
     }

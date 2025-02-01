@@ -1,6 +1,7 @@
 package com.sda.travel_agency_project.controllers;
 
 import com.sda.travel_agency_project.dtos.AirportDto;
+import com.sda.travel_agency_project.dtos.CityDto;
 import com.sda.travel_agency_project.entities.Airport;
 import com.sda.travel_agency_project.services.AirportService;
 import jakarta.validation.Valid;
@@ -33,5 +34,10 @@ public AirportDto create(@Valid @RequestBody AirportDto airportDto) {
     }
     @GetMapping("/public/by_city")
     public List<Airport> findByCity(@RequestParam Long id){return airportService.getByCity(id);}
+
+    @GetMapping("/public/all")
+    public List<AirportDto> findAll() {
+        return airportService.findAll();
+    }
 
 }
