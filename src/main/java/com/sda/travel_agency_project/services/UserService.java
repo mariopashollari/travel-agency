@@ -5,6 +5,7 @@ import com.sda.travel_agency_project.entities.Airport;
 import com.sda.travel_agency_project.exceptions.AgencyExceptions;
 import com.sda.travel_agency_project.repositories.UserRepository;
 import com.sda.travel_agency_project.static_data.Role;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,6 +36,7 @@ public class UserService {
             return userRepository.save(user);
         }
     }
+
     public AgencyUser createAdmin(AgencyUser user) {
         if (userRepository.existsByUsername(user.getUsername())) {
             throw new RuntimeException("User with this username exists");
@@ -61,5 +63,17 @@ public class UserService {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return userRepository.findByUsername(username)
                 .orElseThrow(()-> AgencyExceptions.notFound(User.class.getSimpleName(), username));
+    }
+
+    @PostConstruct
+    private void writeAdmin() {
+        if (!userRepository.existsByUsername("admin")) {
+            AgencyUser agencyUser = new AgencyUser();
+            agencyUser.setUsername("admin");
+            agencyUser.setPassword(passwordEncoder.encode("admin"));
+            agencyUser.setRole(Role.ROLE_ADMIN);
+            agencyUser.setActive(true);
+            userRepository.save(agencyUser);
+        }
     }
 }

@@ -23,6 +23,6 @@ public class UserController {
     }
     @PostMapping("/create_admin")
     public AgencyUser createAdmin(@RequestBody AgencyUser user) {
-        return userService.create(user);
+        return userService.createAdmin(user);
     }
 }
